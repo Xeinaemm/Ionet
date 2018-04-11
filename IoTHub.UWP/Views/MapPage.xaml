@@ -1,0 +1,33 @@
+﻿<Page
+	x:Class="IoTHub.UWP.Views.MapPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Style="{StaticResource PageStyle}"
+	DataContext="{Binding MapViewModel, Source={StaticResource Locator}}"
+	xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+	xmlns:controls="using:IoTHub.UWP.Controls"
+	mc:Ignorable="d">
+
+	<Grid>
+		<maps:MapControl Margin="16" LandmarksVisible="True" x:Name="Map"
+						MapServiceToken="{Binding MapServiceToken}"
+						ZoomInteractionMode="GestureAndControl"
+						ColorScheme="Dark" Style="Aerial3DWithRoads"
+						IsTabStop="False">
+
+			<maps:MapItemsControl ItemsSource="{Binding Devices}">
+				<maps:MapItemsControl.ItemTemplate>
+					<DataTemplate>
+						<controls:CharlieDeviceControl UseLayoutRounding="True"
+														maps:MapControl.NormalizedAnchorPoint="1.0, 1.0" maps:MapControl.Location="{Binding Location}" />
+					</DataTemplate>
+				</maps:MapItemsControl.ItemTemplate>
+			</maps:MapItemsControl>
+		</maps:MapControl>
+
+		<Rectangle RadiusX="8" RadiusY="8" StrokeDashArray="4,4,4,4" Stroke="White" StrokeThickness="1"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+	</Grid>
+</Page>

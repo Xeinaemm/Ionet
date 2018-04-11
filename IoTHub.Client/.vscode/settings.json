@@ -1,0 +1,15 @@
+{
+	"files.exclude": {
+		".build": true
+	},
+	"files.associations": {
+		"secure_device_riot.h": "c"
+	},
+	"C_Cpp.intelliSenseEngineFallback": "Disabled",
+	"C_Cpp.errorSquiggles": "Disabled",
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"editor.autoIndent": true,
+	"editor.renderWhitespace": "all",
+	"C_Cpp.intelliSenseEngine": "Tag Parser"
+}

@@ -1,0 +1,3 @@
+#define MESSAGE_MAX_LEN 256
+#define LOOP_DELAY  10
+#define INTERVAL 500

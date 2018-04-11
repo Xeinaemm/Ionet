@@ -1,0 +1,71 @@
+﻿<Page
+	x:Class="IoTHub.UWP.Views.DevicesChartPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Style="{StaticResource PageStyle}"
+	DataContext="{Binding DevicesChartViewModel, Source={StaticResource Locator}}"
+	xmlns:tc="using:Telerik.UI.Xaml.Controls.Chart"
+	mc:Ignorable="d">
+	<Page.Resources>
+		<Style x:Key="CustomAxis" TargetType="tc:Axis">
+			<Setter Property="TitleTemplate">
+				<Setter.Value>
+					<DataTemplate>
+						<TextBlock Text="{Binding}" Foreground="AliceBlue" />
+					</DataTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Page.Resources>
+	<Grid>
+		<Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+			<tc:RadCartesianChart PaletteName="DefaultLight">
+				<tc:RadCartesianChart.VerticalAxis>
+					<tc:LinearAxis Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" ShowLabels="True"
+									Title="Temperature" Style="{StaticResource CustomAxis}" >
+						<tc:LinearAxis.LineStyle>
+							<Style TargetType="Line">
+								<Setter Property="Stroke" Value="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+							</Style>
+						</tc:LinearAxis.LineStyle>
+						<tc:LinearAxis.MajorTickStyle>
+							<Style TargetType="Rectangle">
+								<Setter Property="Fill" Value="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+							</Style>
+						</tc:LinearAxis.MajorTickStyle>
+					</tc:LinearAxis>
+				</tc:RadCartesianChart.VerticalAxis>
+				<tc:RadCartesianChart.HorizontalAxis>
+					<tc:DateTimeContinuousAxis Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" ShowLabels="true"
+												Title="Time" LabelFormat="{}{0:HH:mm:ss}" Style="{StaticResource CustomAxis}" LabelFitMode="Rotate">
+						<tc:DateTimeContinuousAxis.LineStyle>
+							<Style TargetType="Line">
+								<Setter Property="Stroke" Value="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+							</Style>
+						</tc:DateTimeContinuousAxis.LineStyle>
+						<tc:DateTimeContinuousAxis.MajorTickStyle>
+							<Style TargetType="Rectangle">
+								<Setter Property="Fill" Value="{ThemeResource SystemControlBackgroundBaseMediumBrush}" />
+							</Style>
+						</tc:DateTimeContinuousAxis.MajorTickStyle>
+					</tc:DateTimeContinuousAxis>
+				</tc:RadCartesianChart.HorizontalAxis>
+				<tc:RadCartesianChart.Series>
+					<tc:LineSeries ItemsSource="{Binding DeviceChart, Mode=TwoWay}">
+						<tc:LineSeries.ValueBinding>
+							<tc:PropertyNameDataPointBinding PropertyName="Temperature" />
+						</tc:LineSeries.ValueBinding>
+						<tc:LineSeries.CategoryBinding>
+							<tc:PropertyNameDataPointBinding PropertyName="DateTime" />
+						</tc:LineSeries.CategoryBinding>
+					</tc:LineSeries>
+				</tc:RadCartesianChart.Series>
+			</tc:RadCartesianChart>
+		</Grid>
+
+		<Rectangle RadiusX="8" RadiusY="8" StrokeDashArray="4,4,4,4" Stroke="White" StrokeThickness="1"
+					HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+	</Grid>
+</Page>
